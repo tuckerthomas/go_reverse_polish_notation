@@ -15,7 +15,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println("Reverse Polish Notation Calculator")
+		fmt.Println("\n\nReverse Polish Notation Calculator")
 		fmt.Print("Enter in calculation: ")
 		input, _ := reader.ReadString('\n')
 		input = strings.Trim(input, "\n")
@@ -58,15 +58,21 @@ func rpnCalc(s string) float64 {
 					log.Fatal(err)
 				}
 			} else if strings.ContainsAny(readString, "+-*x/") { // Check for operator
-				// Pop
-				i := len(items) - 1
-				num1 := items[i]
-				items = items[:i]
+				stacksize := len(items) - 1
+
+				if stacksize < 1 {
+					fmt.Println("Sequence entered is incorrect")
+					break
+				}
 
 				// Pop
-				i = len(items) - 1
-				num2 := items[i]
-				items = items[:i]
+				num1 := items[stacksize]
+				items = items[:stacksize]
+
+				// Pop
+				stacksize = len(items) - 1
+				num2 := items[stacksize]
+				items = items[:stacksize]
 
 				if readString == "+" {
 					items = append(items, num1+num2)
@@ -99,4 +105,7 @@ func rpnCalc(s string) float64 {
 			log.Fatal(err)
 		}
 	}
+
+	// Worst case, return 0
+	return 0
 }
