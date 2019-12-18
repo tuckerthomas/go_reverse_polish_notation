@@ -57,7 +57,7 @@ func rpnCalc(s string) float64 {
 					fmt.Println("Error parsing number")
 					log.Fatal(err)
 				}
-			} else if strings.ContainsAny(readString, "+-*/") { // Check for operator
+			} else if strings.ContainsAny(readString, "+-*x/") { // Check for operator
 				// Pop
 				i := len(items) - 1
 				num1 := items[i]
@@ -76,7 +76,7 @@ func rpnCalc(s string) float64 {
 					items = append(items, num1-num2)
 					fmt.Println("Subtracted ", num1, " and ", num2, " result = ", items[len(items)-1])
 
-				} else if readString == "*" {
+				} else if readString == "*" || readString == "x" {
 					items = append(items, num1*num2)
 					fmt.Println("Multiplied ", num1, " and ", num2, " result = ", items[len(items)-1])
 
