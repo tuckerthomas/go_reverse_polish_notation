@@ -40,7 +40,7 @@ func rpnCalc(s string) float64 {
 		readString = strings.Trim(readString, " ")
 
 		if err == nil {
-			fmt.Println("\nPrinting ", i, " parameter ", readString)
+			fmt.Println("\nPrinting ", readString, " parameter ", i)
 
 			// Check for number
 			if strings.ContainsAny(readString, "0123456789") {
